@@ -1,0 +1,172 @@
+swagger: "2.0"
+info:
+  description: "This is the Swagger description of the Foodie application, which uses the Foodish API. In this page you can check the description of each of the API endpoint, used by the Foodie app."
+  version: "1.0.0"
+  title: "Swagger Foodie"
+host: "foodish-api.herokuapp.com"
+basePath: "/images"
+tags:
+- name: "images"
+  description: "Images about different types of foodies"
+schemes:
+- "https"
+- "http"
+paths:
+  /images:
+    post:
+      tags:
+      - "images"
+      summary: "Add a new foodie to the food list"
+      description: "You can add a picture of a new food via this endpoint"
+      operationId: "addFood"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Food object that needs to be added to the food list"
+        required: true
+        schema:
+          $ref: "#/definitions/Food"
+      responses:
+        "405":
+          description: "Invalid input"
+        
+  /images/{foodId}:
+   delete:
+      tags:
+      - "images"
+      summary: "Deletes a foodie"
+      description: ""
+      operationId: "deleteFood"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "foodId"
+        in: "path"
+        description: "Food id to delete"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Foodie not found"
+  /images/burger:
+   get:
+      tags:
+      - "images"
+      summary: "Find a photo of a random burger"
+      description: "Returns an image of a random burger"
+      operationId: "getBurgerById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Food"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"
+  /images/butter-chicken:
+   get:
+      tags:
+      - "images"
+      summary: "Find a photo of a butter-chicken"
+      description: "Returns an image of a butter-chicken"
+      operationId: "getChickenById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Food"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"
+  /images/dessert:
+   get:
+      tags:
+      - "images"
+      summary: "Find a photo of a dessert"
+      description: "Returns an image of a dessert"
+      operationId: "getDessertById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Food"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"        
+  /images/pasta:
+   get:
+      tags:
+      - "images"
+      summary: "Find a photo of a pasta"
+      description: "Returns an image of a pasta"
+      operationId: "getPastaById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Food"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"
+  /images/pizza:
+   get:
+      tags:
+      - "images"
+      summary: "Find a photo of a pizza"
+      description: "Returns an image of a pizza"
+      operationId: "getPizzaById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Food"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Food not found"                        
+definitions:
+  Food:
+    type: "object"
+    required:
+    - "id"
+    - "photoUrl"
+    properties:
+      id:
+        type: "string"
+        example: "pizza64"
+      photoUrl:
+        type: "string"
+        example: "https://foodish-api.herokuapp.com/images/pizza/pizza64.jpg"
+    xml:
+      name: "Foodie"
+externalDocs:
+  description: "Find out more about Foodish"
+  url: "https://github.com/surhud004/Foodish"
