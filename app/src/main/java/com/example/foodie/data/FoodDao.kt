@@ -7,16 +7,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.foodie.model.Food
 
-
 @Dao
 interface FoodDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFoodList(foods: List<Food>)
+    suspend fun insertFood(foods: Food)
 
-    @Query("SELECT * FROM Food WHERE id = :id_")
-    suspend fun getFood(id_: Long): Food?
+    @Query("SELECT * FROM Food WHERE image = :id")
+    suspend fun getFood(id: String): Food?
 
     @Query("SELECT * FROM Food")
-    suspend fun getFoodList(): List<Food>
+    fun getFoodList(): List<Food>
+
+    @Query("DELETE FROM Food WHERE image =:id_")
+    fun deleteFood(id_:String)
 }
