@@ -8,5 +8,5 @@ import com.example.foodie.model.Food
 @Database(entities = [Food::class], version = 1, exportSchema = true)
 abstract class FoodDatabase : RoomDatabase() {
 
-    abstract fun posterDao(): FoodDao
+    abstract fun foodDao(): FoodDao
 }
