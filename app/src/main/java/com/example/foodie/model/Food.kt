@@ -8,7 +8,5 @@ import androidx.room.PrimaryKey
 @Immutable
 data class Food (
     @PrimaryKey
-    var id: Int? = 0,
-    var name: String,
-    var imageUrl: String,
+    var image: String,
 )
