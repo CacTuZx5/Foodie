@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodie" >
         <activity
-            android:name=".ui.about.AboutActivity"
-            android:exported="false"
-            android:label="@string/title_activity_about"
-            android:theme="@style/Theme.Foodie.NoActionBar" />
-        <activity
             android:name=".ui.foodlist.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
