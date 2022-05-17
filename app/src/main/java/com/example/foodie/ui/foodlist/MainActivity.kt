@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,9 +47,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        //val navController = findNavController(R.id.nav_host_fragment_content_main)
         return when (item.itemId) {
-            R.id.AboutFragment -> { findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment); true
+            R.id.AboutFragment -> { findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }
