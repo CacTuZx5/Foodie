@@ -3,7 +3,6 @@ package com.example.foodie.di
 
 import android.content.Context
 import android.os.Build
-
 import coil.ImageLoader
 import coil.decode.ImageDecoderDecoder
 import com.example.foodie.network.FoodService
@@ -21,6 +20,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+
+   val api:FoodService by lazy{
+       Retrofit.Builder()
+           .baseUrl("https://foodish-api.herokuapp.com/")
+           .addConverterFactory(GsonConverterFactory.create())
+           .build()
+           .create(FoodService::class.java)
+
+   }
+
+
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
