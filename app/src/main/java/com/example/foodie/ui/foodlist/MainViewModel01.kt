@@ -28,7 +28,6 @@ class MainViewModel01 @Inject constructor(
                     foodLiveData.value=fooditem
                     val list = fooditem.image.split("/")
                     val name=list[4]
-                    //Glide.with(this@FirstFragment).load(fooditem.image).into(binding.imgMeal)
 
                     Log.d("TEST","food name ${fooditem.image} ")
                     Log.d("food name","${name}")

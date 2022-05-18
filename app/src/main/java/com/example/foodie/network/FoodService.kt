@@ -1,6 +1,5 @@
 package com.example.foodie.network
 
-import com.example.foodie.model.Food
 import com.example.foodie.model.Foodmodel
 import retrofit2.Call
 import retrofit2.http.DELETE
@@ -11,9 +10,9 @@ interface FoodService {
     @GET("api")
     fun getFoods(): Call<Foodmodel>
 
-    @POST("/images/")
-    fun createNewFood(): Call<Food>
+    @POST("images/")
+    fun createNewFood(f:Foodmodel): Call<Foodmodel>
 
-    @DELETE("/images/")
+    @DELETE("images/{id}")
     fun deleteFood(f:Foodmodel): Call<Foodmodel>
 }

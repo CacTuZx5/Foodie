@@ -1,5 +1,6 @@
 package com.example.foodie.ui.foodlist
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,22 +12,24 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.foodie.databinding.FragmentHomeBinding
 import com.example.foodie.model.Foodmodel
 
+
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
+    var activity: Activity? = getActivity()
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainMvvm01:MainViewModel
     private lateinit var foodAdapter:FoodItemAdapter
+    //private lateinit var binding1: ActivityMainBinding
+    //private final Foodmodel f = new Foodmodel("asd");
 
     private var myfoodList=ArrayList<Foodmodel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mainMvvm01=ViewModelProvider(this)[MainViewModel::class.java]
         super.onCreate(savedInstanceState)
-
-
         //mainMvvm=ViewModelProviders.of
     }
     override fun onCreateView(
@@ -56,7 +59,8 @@ class FirstFragment : Fragment() {
     private fun onFoodItemClick() {
         foodAdapter.onItemClick={food -> myfoodList.remove(food)
             foodAdapter.notifyDataSetChanged()
-        }
+            mainMvvm01.deleteFood(food)
+            }
 
     }
 
