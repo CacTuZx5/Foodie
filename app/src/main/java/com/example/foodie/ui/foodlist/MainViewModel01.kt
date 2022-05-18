@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodie.di.NetworkModule
-import com.example.foodie.model.Foodmodel
+import com.example.foodie.model.Food
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,14 +16,14 @@ import javax.inject.Inject
 class MainViewModel01 @Inject constructor(
     mainRepository: MainRepository
 ) : ViewModel() {
-    private var foodLiveData=MutableLiveData<Foodmodel>()
+    private var foodLiveData=MutableLiveData<Food>()
 
 
     fun getRandomFood(){
-        NetworkModule.api.getFoods().enqueue(object : Callback<Foodmodel> {
-            override fun onResponse(call: Call<Foodmodel>, response: Response<Foodmodel>) {
+        NetworkModule.api.getFoods().enqueue(object : Callback<Food> {
+            override fun onResponse(call: Call<Food>, response: Response<Food>) {
                 if (response.body()!=null){
-                    val fooditem: Foodmodel = response.body()!!
+                    val fooditem: Food = response.body()!!
 
                     foodLiveData.value=fooditem
                     val list = fooditem.image.split("/")
@@ -38,12 +38,12 @@ class MainViewModel01 @Inject constructor(
 
             }
 
-            override fun onFailure(call: Call<Foodmodel>, t: Throwable) {
+            override fun onFailure(call: Call<Food>, t: Throwable) {
                 Log.d("Food list fragment",t.message.toString())
             }
         })
     }
-    fun observefoodLiveData():LiveData<Foodmodel>{
+    fun observefoodLiveData():LiveData<Food>{
         return foodLiveData
     }
 }

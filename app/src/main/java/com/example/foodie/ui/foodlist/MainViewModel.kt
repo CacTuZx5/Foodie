@@ -4,25 +4,32 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.foodie.di.NetworkModule
-import com.example.foodie.model.Foodmodel
+import com.example.foodie.model.Food
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class MainViewModel():ViewModel() {
-    private var foodLiveData= MutableLiveData<Foodmodel>()
+    private var foodLiveData= MutableLiveData<Food>()
     private var mock = true
 
-fun createNewFood(f:Foodmodel){
+fun createNewFood(f:Food){
+    viewModelScope.launch {
+        //foodDatabase.foodDao().insertFood(f)
+    }
+
+
     if (mock){
         foodLiveData.value=f
         Log.d("creating new item","${f.image}")
     }
     else {
-        NetworkModule.api.createNewFood(f).enqueue(object : Callback<Foodmodel> {
-            override fun onResponse(call: Call<Foodmodel>, response: Response<Foodmodel>) {
+        NetworkModule.api.createNewFood(f).enqueue(object : Callback<Food> {
+            override fun onResponse(call: Call<Food>, response: Response<Food>) {
                 if (response.body()!=null){
                     Log.d("delete","${response.body()}")
                 }
@@ -32,7 +39,7 @@ fun createNewFood(f:Foodmodel){
 
             }
 
-            override fun onFailure(call: Call<Foodmodel>, t: Throwable) {
+            override fun onFailure(call: Call<Food>, t: Throwable) {
                 Log.d("Food creating error",t.message.toString())
             }
         })
@@ -42,10 +49,10 @@ fun createNewFood(f:Foodmodel){
 }
 
     fun getRandomFood(){
-        NetworkModule.api.getFoods().enqueue(object : Callback<Foodmodel> {
-            override fun onResponse(call: Call<Foodmodel>, response: Response<Foodmodel>) {
+        NetworkModule.api.getFoods().enqueue(object : Callback<Food> {
+            override fun onResponse(call: Call<Food>, response: Response<Food>) {
                 if (response.body()!=null){
-                    val fooditem: Foodmodel = response.body()!!
+                    val fooditem: Food = response.body()!!
 
                     foodLiveData.value=fooditem
                     val list = fooditem.image.split("/")
@@ -61,19 +68,23 @@ fun createNewFood(f:Foodmodel){
 
             }
 
-            override fun onFailure(call: Call<Foodmodel>, t: Throwable) {
+            override fun onFailure(call: Call<Food>, t: Throwable) {
                 Log.d("Food list fragment error",t.message.toString())
             }
         })
     }
 
-    fun deleteFood(f:Foodmodel){
+    fun deleteFood(f:Food){
+        viewModelScope.launch {
+            //foodDatabase.foodDao().deleteFood(f)
+        }
+
         if (mock){
 
         }
         else {
-            NetworkModule.api.deleteFood(f).enqueue(object : Callback<Foodmodel> {
-                override fun onResponse(call: Call<Foodmodel>, response: Response<Foodmodel>) {
+            NetworkModule.api.deleteFood(f).enqueue(object : Callback<Food> {
+                override fun onResponse(call: Call<Food>, response: Response<Food>) {
                     if (response.body()!=null){
                         Log.d("delete","${response.body()}")
                     }
@@ -82,7 +93,7 @@ fun createNewFood(f:Foodmodel){
                     }
 
                 }
-                override fun onFailure(call: Call<Foodmodel>, t: Throwable) {
+                override fun onFailure(call: Call<Food>, t: Throwable) {
                     Log.d("Food delete error",t.message.toString())
                 }
             })
@@ -91,7 +102,7 @@ fun createNewFood(f:Foodmodel){
     }
 
 
-    fun observefoodLiveData(): LiveData<Foodmodel> {
+    fun observefoodLiveData(): LiveData<Food> {
         return foodLiveData
     }
 }

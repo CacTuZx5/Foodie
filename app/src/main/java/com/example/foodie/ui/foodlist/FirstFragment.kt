@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.foodie.databinding.FragmentHomeBinding
-import com.example.foodie.model.Foodmodel
+import com.example.foodie.model.Food
 
 
 /**
@@ -18,6 +18,8 @@ import com.example.foodie.model.Foodmodel
  */
 class FirstFragment : Fragment() {
     var activity: Activity? = getActivity()
+    //var activity2 = context as Activity
+
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainMvvm01:MainViewModel
@@ -25,11 +27,17 @@ class FirstFragment : Fragment() {
     //private lateinit var binding1: ActivityMainBinding
     //private final Foodmodel f = new Foodmodel("asd");
 
-    private var myfoodList=ArrayList<Foodmodel>()
+    private var myfoodList=ArrayList<Food>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainMvvm01=ViewModelProvider(this)[MainViewModel::class.java]
+       //val foodDatabase= FoodDatabase.getInstance(activity2)
+       //val viewModelFactory=MainViewModelFactory(foodDatabase)
+      // mainMvvm01= ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+
+
         super.onCreate(savedInstanceState)
+        mainMvvm01= ViewModelProvider(this)[MainViewModel::class.java]
         //mainMvvm=ViewModelProviders.of
     }
     override fun onCreateView(
@@ -74,8 +82,8 @@ class FirstFragment : Fragment() {
     }
 
     private fun observerrandomFood() {
-        mainMvvm01.observefoodLiveData().observe(viewLifecycleOwner,object : Observer<Foodmodel>{
-            override fun onChanged(t: Foodmodel?) {
+        mainMvvm01.observefoodLiveData().observe(viewLifecycleOwner,object : Observer<Food>{
+            override fun onChanged(t: Food?) {
                 myfoodList.add(t!!)
                 //Glide.with(this@FirstFragment).load(t!!.image).into(binding.imgMeal)
                 foodAdapter.setfoodList(myfoodList)

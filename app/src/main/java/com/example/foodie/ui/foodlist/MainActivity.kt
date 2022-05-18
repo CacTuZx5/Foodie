@@ -14,8 +14,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.foodie.R
+import com.example.foodie.data.FoodDatabase
 import com.example.foodie.databinding.ActivityMainBinding
-import com.example.foodie.model.Foodmodel
+import com.example.foodie.model.Food
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,14 +25,18 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var foodAdapter:FoodItemAdapter
     private lateinit var mainMvvm01:MainViewModel
-    private lateinit var f:Foodmodel
+    private lateinit var f:Food
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainMvvm01= ViewModelProvider(this)[MainViewModel::class.java]
 
-        f= Foodmodel("")
+        val foodDatabase= FoodDatabase.getInstance(this)
+       //val viewModelFactory=MainViewModelFactory(foodDatabase)
+
+       mainMvvm01= ViewModelProvider(this)[MainViewModel::class.java]
+
+        f= Food("")
         foodAdapter=FoodItemAdapter()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,6 +51,8 @@ class MainActivity : AppCompatActivity() {
        binding.fab.setOnClickListener {
             addFood()
         }
+       //mainMvvm01=ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
 
 
     }
@@ -94,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
             f.image=fimage
             mainMvvm01.createNewFood(f)
-            Toast.makeText(this,"Adding User Information Success", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Food saved", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         addDialog.setNegativeButton("Cancel"){
