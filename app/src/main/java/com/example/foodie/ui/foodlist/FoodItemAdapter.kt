@@ -11,6 +11,9 @@ class FoodItemAdapter():RecyclerView.Adapter<FoodItemAdapter.FoodViewHolder>() {
     private var foodList=ArrayList<Food>()
     var onItemClick : ((Food)->Unit)? =null
 
+    fun getfoodList(): ArrayList<Food> {
+        return foodList
+    }
 
     fun setfoodList(foodList: List<Food>){
         this.foodList=foodList as ArrayList<Food>

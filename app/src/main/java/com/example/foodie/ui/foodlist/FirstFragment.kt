@@ -56,12 +56,12 @@ class FirstFragment : Fragment() {
         for (i in 1..10){
             mainMvvm01.getRandomFood()
         }
+        mainMvvm01.getOneFood()
+
 
         observerrandomFood()
         prepareFoodListRecyclerView()
         onFoodItemClick()
-
-
     }
 
     private fun onFoodItemClick() {

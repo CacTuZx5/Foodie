@@ -10,6 +10,9 @@ interface FoodService {
     @GET("api")
     fun getFoods(): Call<Food>
 
+    @GET("images/pizza/pizza72.jpg")
+    fun getOneFood(): Call<Food>
+
     @POST("images/")
     fun createNewFood(f:Food): Call<Food>
 
