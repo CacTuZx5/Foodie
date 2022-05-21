@@ -40,7 +40,7 @@ android {
     testOptions {
         unitTests.all {
             jacoco {
-                toolVersion = "0.8.7"
+                //toolVersion = "0.8.7"
                 includeNoLocationClasses = true
             }
         }

@@ -19,7 +19,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class FoodDaoTest {
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -44,7 +43,6 @@ class FoodDaoTest {
     fun insertFood() = runBlockingTest{
         val foodItem = Food("https://foodish-api.herokuapp.com/images/pizza/pizza52.jpg")
         dao.insertFood(foodItem)
-
         val allFoodItems = dao.getAllFoods().getOrAwaitValue()
 
         assertThat(allFoodItems).contains(foodItem)

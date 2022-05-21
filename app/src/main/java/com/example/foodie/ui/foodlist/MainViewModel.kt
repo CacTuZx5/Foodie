@@ -19,11 +19,10 @@ class MainViewModel():ViewModel() {
 
     fun createNewFood(f:Food){
     viewModelScope.launch {
-        //foodDatabase.foodDao().insertFood(f)
     }
     if (mock){
         foodLiveData.value=f
-        Log.d("creating new item","${f.image}")
+        Log.d("New Food has been added to the list","${f.image}")
     }
     else {
         NetworkModule.api.createNewFood(f).enqueue(object : Callback<Food> {
@@ -51,7 +50,6 @@ class MainViewModel():ViewModel() {
                     foodLiveData.value=fooditem
                     val list = fooditem.image.split("/")
                     val name=list[4]
-                    //Glide.with(this@FirstFragment).load(fooditem.image).into(binding.imgMeal)
 
                     Log.d("TEST","food name ${fooditem.image} ")
                     Log.d("food name","${name}")
@@ -74,7 +72,6 @@ class MainViewModel():ViewModel() {
                     foodLiveData.value=fooditem
                     val list = fooditem.image.split("/")
                     val name=list[4]
-                    //Glide.with(this@FirstFragment).load(fooditem.image).into(binding.imgMeal)
 
                     Log.d("TEST","food name ${fooditem.image} ")
                     Log.d("food name","${name}")
@@ -91,7 +88,6 @@ class MainViewModel():ViewModel() {
 
     fun deleteFood(f:Food){
         viewModelScope.launch {
-            //foodDatabase.foodDao().deleteFood(f)
         }
         if (mock){
 

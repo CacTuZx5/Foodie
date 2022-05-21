@@ -15,16 +15,13 @@ import retrofit2.Response
 
 class NetworkModuleTest {
     private var server = MockWebServer()
-
     fun setUp(): MockWebServer {
         server = MockWebServer()
         val response = MockResponse()
             .setResponseCode(200)
             .setBody("{\"image\":\"https://foodish-api.herokuapp.com/images/pizza/pizza52.jpg\"}")
         server.enqueue(response)
-
         return server
-
     }
 
     @Before
@@ -61,15 +58,14 @@ class NetworkModuleTest {
 
     @Test
     fun `Successfull Any Food request example`() {
-        server.enqueue(MockResponse().setBody("success"))
-
+        val testData="images"
         NetworkModule.api.getOneFood().enqueue(object : Callback<Food> {
             override fun onResponse(call: Call<Food>, response: Response<Food>) {
                 if (response.body()!=null){
                     var fooditem: Food = response.body()!!
                     val list = fooditem.image.split("/")
                     val name=list[3]
-                    Assert.assertEquals("images", name)
+                    Assert.assertEquals(testData, name)
                 }
                 else{
                     return
@@ -77,7 +73,7 @@ class NetworkModuleTest {
             }
 
             override fun onFailure(call: Call<Food>, t: Throwable) {
-                Log.d("Food list fragment error",t.message.toString())
+                Log.d("Error while parsing the API response",t.message.toString())
 
             }
         })
@@ -85,13 +81,16 @@ class NetworkModuleTest {
 
     @Test
     fun `Successfull get Pizza example`() {
+        val testData="https://foodish-api.herokuapp.com/images/pizza/pizza72.jpg"
+        server.enqueue(MockResponse().setBody("success"))
         NetworkModule.api.getOneFood().enqueue(object : Callback<Food> {
             override fun onResponse(call: Call<Food>, response: Response<Food>) {
                 if (response.body()!=null){
                     var fooditem: Food = response.body()!!
                     val list = fooditem.image.split("/")
                     val name=list[4]
-                    Assert.assertEquals("https://foodish-api.herokuapp.com/images/pizza/pizza72.jpg", fooditem.image)
+                    Assert.assertEquals(testData, fooditem.image)
+
                 }
                 else{
                     return
@@ -99,8 +98,7 @@ class NetworkModuleTest {
             }
 
             override fun onFailure(call: Call<Food>, t: Throwable) {
-                Log.d("Food list fragment error",t.message.toString())
-
+                Log.d("Error while parsing the API response",t.message.toString())
             }
         })
     }
@@ -123,7 +121,7 @@ class NetworkModuleTest {
             }
 
             override fun onFailure(call: Call<Food>, t: Throwable) {
-                Log.d("Food list fragment error",t.message.toString())
+                Log.d("Error while parsing the API response",t.message.toString())
             }
         })
     }
@@ -136,7 +134,28 @@ class NetworkModuleTest {
                 if (response.body()!=null){
                     var fooditem: Food = response.body()!!
                     val list = fooditem.image.split("/")
-                    val name=list[4]
+                    Assert.assertEquals("https://foodish-api.herokuapp.com/images/pizza/pizza52.jpg", fooditem.image)
+                }
+                else{
+                    return
+                }
+            }
+
+            override fun onFailure(call: Call<Food>, t: Throwable) {
+                Log.d("Error while parsing the API response",t.message.toString())
+
+            }
+        })
+    }
+
+    @Test
+    fun `Successfull create request example`() {
+        var fooditem: Food= Food("new food")
+        NetworkModule.api.createNewFood(fooditem).enqueue(object : Callback<Food> {
+            override fun onResponse(call: Call<Food>, response: Response<Food>) {
+                if (response.body()!=null){
+                    var fooditem: Food = response.body()!!
+                    val list = fooditem.image.split("/")
                     Assert.assertEquals("https://foodish-api.herokuapp.com/images/pizza/pizza52.jpg", fooditem.image)
 
                 }
@@ -146,7 +165,7 @@ class NetworkModuleTest {
             }
 
             override fun onFailure(call: Call<Food>, t: Throwable) {
-                Log.d("Food list fragment error",t.message.toString())
+                Log.d("Error while parsing the API response",t.message.toString())
 
             }
         })
@@ -169,6 +188,7 @@ class NetworkModuleTest {
                 }
             }
             override fun onFailure(call: Call<Food>, t: Throwable) {
+                Log.d("Error while parsing the API response",t.message.toString())
 
             }
         })

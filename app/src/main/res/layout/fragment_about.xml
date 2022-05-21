@@ -12,24 +12,13 @@
         android:id="@+id/foodlistconstlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<!--
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_60sdp"
-        android:textSize="@dimen/_17ssp"
-        android:textStyle="bold"
-        android:text="@string/second_fragment_label"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/about_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="This application was created in order to get inspired to what to eat."
             android:textAlignment="center"
             android:textSize="@dimen/_17ssp" />
@@ -56,23 +45,8 @@
             app:layout_constraintTop_toBottomOf="@id/about_description2"
             app:layout_constraintStart_toStartOf="parent"
             />
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/foodlistconstlayout"-->
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--        app:layout_constraintBottom_toTopOf="@id/button_second"-->
-
-
-    <!--<Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

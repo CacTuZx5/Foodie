@@ -9,6 +9,8 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
+//@RunWith(RobolectricTestRunner.class)
+
 public class MainActivityTest {
     var mainActivity: MainActivity? = null
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +21,7 @@ public class MainActivityTest {
     @Throws(Exception::class)
     fun setup() {
 // Calls the lifecycle: create-start-postCreate-resume
-        //mainActivity = Robolectric.setupActivity(MainActivity::class.java)
+        //mainActivity = Roboelectric.setupActivity(MainActivity::class.java)
     }
 
     @Test
