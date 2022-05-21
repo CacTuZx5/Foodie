@@ -1,12 +1,10 @@
 package com.example.foodie.model
 
-import androidx.compose.runtime.Immutable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-@Immutable
-data class Food (
+@Entity (tableName = "foodDB")
+data class Food(
     @PrimaryKey
-    var image: String,
+    var image: String
 )

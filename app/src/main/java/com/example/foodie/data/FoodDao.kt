@@ -1,24 +1,19 @@
 package com.example.foodie.data
 
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.example.foodie.model.Food
 
 @Dao
 interface FoodDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFood(foods: Food)
+    suspend fun insertFood(food: Food)
 
-    @Query("SELECT * FROM Food WHERE image = :id")
-    suspend fun getFood(id: String): Food?
+    @Delete
+    suspend fun deleteFood(food:Food)
 
-    @Query("SELECT * FROM Food")
-    fun getFoodList(): List<Food>
-
-    @Query("DELETE FROM Food WHERE image =:id_")
-    fun deleteFood(id_:String)
+    @Query("SELECT * FROM foodDB order by image")
+    fun getAllFoods(): LiveData<List<Food>>
 }

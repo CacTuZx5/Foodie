@@ -5,20 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foodie.databinding.FoodItemBinding
-import com.example.foodie.model.Foodmodel
+import com.example.foodie.model.Food
 
 class FoodItemAdapter():RecyclerView.Adapter<FoodItemAdapter.FoodViewHolder>() {
-    private var foodList=ArrayList<Foodmodel>()
-    var onItemClick : ((Foodmodel)->Unit)? =null
+    private var foodList=ArrayList<Food>()
+    var onItemClick : ((Food)->Unit)? =null
 
+    fun getfoodList(): ArrayList<Food> {
+        return foodList
+    }
 
-    fun setfoodList(foodList: List<Foodmodel>){
-        this.foodList=foodList as ArrayList<Foodmodel>
+    fun setfoodList(foodList: List<Food>){
+        this.foodList=foodList as ArrayList<Food>
         notifyDataSetChanged()
     }
 
     inner class FoodViewHolder(val binding: FoodItemBinding):RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         return FoodViewHolder(

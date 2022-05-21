@@ -21,7 +21,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-
    val api:FoodService by lazy{
        Retrofit.Builder()
            .baseUrl("https://foodish-api.herokuapp.com/")
