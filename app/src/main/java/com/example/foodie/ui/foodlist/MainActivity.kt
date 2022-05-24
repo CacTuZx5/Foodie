@@ -18,12 +18,14 @@ import com.example.foodie.R
 import com.example.foodie.data.FoodDatabase
 import com.example.foodie.databinding.ActivityMainBinding
 import com.example.foodie.model.Food
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var analytics:FirebaseAnalytics
 
     private lateinit var foodAdapter:FoodItemAdapter
     private lateinit var mainMvvm01:MainViewModel
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        analytics=FirebaseAnalytics.getInstance(this)
+
          foodDatabase= FoodDatabase.getInstance(this)
 
        mainMvvm01= ViewModelProvider(this)[MainViewModel::class.java]
@@ -52,10 +56,8 @@ class MainActivity : AppCompatActivity() {
        binding.fab.setOnClickListener {
            lifecycleScope.launch {
                addFood()
-
+               throw RuntimeException("Test Crash")
            }
-
-
         }
 
     }
